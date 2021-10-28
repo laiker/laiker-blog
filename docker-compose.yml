@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  php:
+    image: 'xdpugachevx/blog-php:latest'
+    volumes: [ './:/app' ]
+    working_dir: '/app'
+    ports: [ '8000:8000' ]
+    user: '1000:1000'
+    environment:
+      XDEBUG_CONFIG: 'discover_client_host=true client_host=172.17.0.1'
+    command: 'php artisan serve --host 0.0.0.0'
+  mysql:
+    image: 'mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'blog'
+    ports: [ '3306:3306' ]
+    volumes: [ 'mysql:/var/lib/mysql' ]
+    command: '--default-authentication-plugin=mysql_native_password'
+
+volumes:
+  mysql:
