@@ -20,5 +20,12 @@
                 {{ $comment->body }}
             </p>
         </div>
+        @if ($comment->canDelete())
+            <form method="POST" action="/comments/{{ $comment->id }}">
+                @csrf
+                @method('DELETE')
+                <button class="bg-red-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-red-600" type="submit">Удалить</button>
+            </form>
+        @endif
     </article>
 </x-panel>
