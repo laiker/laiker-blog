@@ -19,8 +19,11 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function canDelete()
+    public function canDelete($currentUser)
     {
-        return now()->diffInHours($this->created_at) < 1 || \Auth::user()->is_admin;
+        if(!$currentUser)
+            return false;   
+
+        return ($currentUser->id == $this->user_id && now()->diffInHours($this->created_at) < 1) || $currentUser->is_admin;
     }
 }

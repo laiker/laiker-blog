@@ -1,19 +1,15 @@
 <?php
 
 namespace App\Services;
-use App\Models\Comment;
 
 class CommentService
 {
-    public function __construct(Comment $comment)
+    public function delete($comment, $currentUser)
     {
-        $this->comment = $comment;
-    }
-
-    public function delete()
-    {
-        if ($this->comment->canDelete()) {
-            $this->comment->delete();
+        if (!$comment->canDelete($currentUser)) {
+            throw new \RuntimeException('Нельзя удалить комментарий');
         }
+
+        $comment->delete();
     }
 }

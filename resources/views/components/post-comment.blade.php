@@ -1,5 +1,4 @@
-@props(['comment'])
-
+@props(['comment', 'currentUser'])
 <x-panel class="bg-gray-50">
     <article class="flex space-x-4">
         <div class="flex-shrink-0">
@@ -20,7 +19,7 @@
                 {{ $comment->body }}
             </p>
         </div>
-        @if ($comment->canDelete())
+        @if ($comment->canDelete($currentUser))
             <form method="POST" action="/comments/{{ $comment->id }}">
                 @csrf
                 @method('DELETE')

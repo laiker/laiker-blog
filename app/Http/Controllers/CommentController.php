@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comment;
 use App\Services\CommentService;
+use App\Models\Comment;
 
 class CommentController extends Controller
 {
-    public function destroy(Comment $comment)
+    public function destroy(Comment $comment, CommentService $commentService, Request $request)
     {
-        $commentService = new CommentService($comment);
-        $commentService->delete();
-        return back();
+        try {
+            $commentService->delete($comment, $request->user());
+            return back();
+        } catch (Throwable $e) {
+            report($e);
+            return false;
+        }
     }
 }
