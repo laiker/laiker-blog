@@ -52,7 +52,7 @@
                 @include ('posts._add-comment-form')
 
                 @foreach ($post->comments as $comment)
-                    <x-post-comment :comment="$comment"/>
+                    <x-post-comment :comment="$comment" :currentUser="$currentUser"/>
                 @endforeach
             </section>
         </article>

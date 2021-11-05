@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -18,8 +19,10 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $currentUser = Auth::user();
         return view('posts.show', [
-            'post' => $post
+            'post' => $post,
+            'currentUser' => $currentUser,
         ]);
     }
 }
