@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $currentUser = Auth::check() ? Auth::user() : false;
+        $currentUser = Auth::user();
         return view('posts.show', [
             'post' => $post,
             'currentUser' => $currentUser,

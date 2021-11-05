@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Comment extends Model
 {
@@ -19,11 +20,8 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function canDelete($currentUser)
+    public function canDelete(User $user)
     {
-        if(!$currentUser)
-            return false;   
-
-        return ($currentUser->id == $this->user_id && now()->diffInHours($this->created_at) < 1) || $currentUser->is_admin;
+        return ($user->id == $this->user_id && now()->diffInHours($this->created_at) < 1) || $user->is_admin;
     }
 }

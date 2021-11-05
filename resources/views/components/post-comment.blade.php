@@ -19,7 +19,7 @@
                 {{ $comment->body }}
             </p>
         </div>
-        @if ($comment->canDelete($currentUser))
+        @if ($currentUser && $comment->canDelete($currentUser))
             <form method="POST" action="/comments/{{ $comment->id }}">
                 @csrf
                 @method('DELETE')
