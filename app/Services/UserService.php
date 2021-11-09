@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Carbon\Carbon;
 
 class UserService
 {
@@ -17,11 +18,18 @@ class UserService
 
     public function softRestore(User $user)
     {
-        
         $userComments = $user->comments()->withTrashed()->get();
         foreach($userComments as $comment) {
             $comment->restore();
         }
         $user->restore();
+    }
+
+    public static function forceDelete()
+    {
+        User::whereDate('deleted_at', '<=', Carbon::now()->subDays(14))->withTrashed()->get()->map(function ($user) {
+            return $user->forceDelete();
+        });
+        return 'success';
     }
 }

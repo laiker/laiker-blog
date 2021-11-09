@@ -11,7 +11,6 @@ class UserController extends Controller
     {
         $user = $request->user();
         $userService->softDelete($user);
-        
-        return redirect('/')->with("success", "Профиль успешно удален");
+        return redirect('/')->with(\Auth::logout());
     }
 }

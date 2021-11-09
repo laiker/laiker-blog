@@ -17,7 +17,7 @@ class UserLogin
     public function handleUserLogin($event) {
         $user = $event->user;
         if($user->trashed()) {
-            $userService->softRestore($event->user);
+            $this->userService->softRestore($event->user);
         }
     }
 
