@@ -30,7 +30,7 @@ class AddProfileDeleteUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function($table) {
-            $table->dropSoftDeletes();
+            $table->dropSoftDeletes()->index();
         });
 
         Schema::table('comments', function($table) {
