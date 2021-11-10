@@ -39,7 +39,11 @@
                                 Welcome, {{ auth()->user()->name }}!
                             </button>
                         </x-slot>
-
+                        <x-dropdown-item
+                                href="/profile"
+                                :active="request()->is('profile')">
+                                Profile
+                        </x-dropdown-item>
                         @admin
                             <x-dropdown-item
                                 href="/admin/posts"

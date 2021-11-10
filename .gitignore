@@ -4,6 +4,8 @@
 /storage/*.key
 /vendor
 /.idea
+/psysh
+/public/adminer.php
 .env
 .env.backup
 .phpunit.result.cache
