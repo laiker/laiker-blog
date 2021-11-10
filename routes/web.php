@@ -31,5 +31,5 @@ Route::middleware('can:admin')->group(function () {
     Route::resource('admin/posts', AdminPostController::class)->except('show');
 });
 
-Route::view('profile/', 'profile/index')->middleware('auth');
-Route::delete('profile/', [UserController::class, 'softDelete'])->middleware('auth');
+Route::view('profile', 'profile/index')->middleware('auth');
+Route::delete('profile', [UserController::class, 'softDelete'])->middleware('auth');

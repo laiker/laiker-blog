@@ -11,6 +11,7 @@ class UserController extends Controller
     {
         $user = $request->user();
         $userService->softDelete($user);
-        return redirect('/')->with(\Auth::logout());
+        \Auth::logout();
+        return redirect('/');
     }
 }

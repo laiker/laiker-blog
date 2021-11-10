@@ -10,7 +10,7 @@ class UserService
     public function softDelete(User $user)
     {
         $userComments = $user->comments()->get();
-        foreach($userComments as $comment) {
+        foreach ($userComments as $comment) {
             $comment->delete();
         }
         $user->delete();
@@ -18,18 +18,19 @@ class UserService
 
     public function softRestore(User $user)
     {
-        $userComments = $user->comments()->withTrashed()->get();
-        foreach($userComments as $comment) {
-            $comment->restore();
+        if ($user->trashed()) {
+            $user->restore();
+            $userComments = $user->comments()->withTrashed()->get();
+            foreach ($userComments as $comment) {
+                $comment->restore();
+            }
         }
-        $user->restore();
     }
 
-    public static function forceDelete()
+    public function forceDelete()
     {
         User::whereDate('deleted_at', '<=', Carbon::now()->subDays(14))->withTrashed()->get()->map(function ($user) {
             return $user->forceDelete();
         });
-        return 'success';
     }
 }

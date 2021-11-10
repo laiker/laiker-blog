@@ -9,13 +9,6 @@ class EloquentUserProvider extends ServiceProvider
 {
     protected function newModelQuery($model = null)
     {
-        return is_null($model)
-                ? $this->createModel()->newQuery()->withTrashed()
-                : $model->newQuery()->withTrashed();
-    }
-
-    public function boot()
-    {
-        $this->registerPolicies();
+        return parent::newModelQuery($model)->withTrashed();
     }
 }

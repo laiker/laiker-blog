@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(UserService::forceDelete())->daily();
+        $schedule->call(function(UserService $user) {
+            $user->forceDelete();
+        })->daily();
     }
 
     /**

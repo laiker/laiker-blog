@@ -5,27 +5,23 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Services\UserService;
+use Illuminate\Auth\Events\Login;
 
 class UserLogin
 {
-    public $userService;
+    private $userService;
 
     function __construct(UserService $userService) {
         $this->userService = $userService;
     }
 
-    public function handleUserLogin($event) {
+    public function handleUserLogin(Login $event) {
         $user = $event->user;
-        if($user->trashed()) {
-            $this->userService->softRestore($event->user);
-        }
+        $this->userService->softRestore($user);
     }
 
     public function subscribe($events)
     {
-        $events->listen(
-            'Illuminate\Auth\Events\Login',
-            [UserLogin::class, 'handleUserLogin']
-        );
+        $events->listen(Login::class, [UserLogin::class, 'handleUserLogin']);
     }
 }
