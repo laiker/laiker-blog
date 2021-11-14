@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
+/public/adminer.php
 /vendor
 /.idea
 .env
@@ -12,3 +13,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+composer/

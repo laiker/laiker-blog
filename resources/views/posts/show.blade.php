@@ -8,6 +8,9 @@
                     Published
                     <time>{{ $post->created_at->diffForHumans() }}</time>
                 </p>
+                <p class="mt-4 block text-gray-400 text-xs">
+                    Сегодня {{ $post->viewsCountDaily }} / Всего {{ $post->viewsCountAll }}
+                </p>
 
                 <div class="flex items-center lg:justify-center text-sm mt-4">
                     <img src="/images/lary-avatar.svg" alt="Lary avatar">
