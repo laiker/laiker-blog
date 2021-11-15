@@ -21,7 +21,8 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     protected $subscribe = [
-        \App\Listeners\UserLogin::class
+        \App\Listeners\UserLogin::class,
+        \App\Listeners\PostViewListener::class
     ];
 
     /**
