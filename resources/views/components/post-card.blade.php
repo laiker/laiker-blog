@@ -24,6 +24,10 @@
                     <span class="mt-2 block text-gray-400 text-xs">
                         Published <time>{{ $post->created_at->diffForHumans() }}</time>
                     </span>
+
+                    <span class="mt-2 block text-gray-400 text-xs">
+                        Сегодня {{ $post->views_today }} / Всего {{ $post->views_all }}
+                    </span>
                 </div>
             </header>
 

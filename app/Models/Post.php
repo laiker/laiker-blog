@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -46,5 +47,21 @@ class Post extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
+
+    
+    public function getViewsTodayAttribute()
+    {
+        return $this->views()->count();
+    }
+
+    public function getViewsAllAttribute()
+    {
+        return $this->views()->whereDate('viewed_at', Carbon::today())->count();
     }
 }
