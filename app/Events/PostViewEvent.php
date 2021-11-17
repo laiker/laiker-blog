@@ -15,10 +15,5 @@ class PostViewEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $viewData;
-
-    public function __construct($viewData)
-    {
-        $this->viewData = $viewData;
-    }
+    public function __construct(public int $postId, public ?int $userId, public string $ip){}
 }

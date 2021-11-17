@@ -19,7 +19,7 @@ class PostViewListener implements ShouldQueue
 
     public function handleUserView(PostViewEvent $eventData) 
     {
-        $this->viewService->saveView($eventData->viewData);
+        $this->viewService->saveView($eventData);
     }
 
     public function subscribe($events)

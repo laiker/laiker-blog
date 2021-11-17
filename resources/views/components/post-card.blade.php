@@ -26,7 +26,7 @@
                     </span>
 
                     <span class="mt-2 block text-gray-400 text-xs">
-                        Сегодня {{ $post->viewsCountDaily }} / Всего {{ $post->viewsCountAll }}
+                        Сегодня {{ $post->views_today }} / Всего {{ $post->views_all }}
                     </span>
                 </div>
             </header>

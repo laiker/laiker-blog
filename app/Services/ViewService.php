@@ -7,8 +7,8 @@ use App\Events\PostViewEvent;
 
 class ViewService
 {
-    public function saveView($viewData)
+    public function saveView(PostViewEvent $eventViewData)
     {
-        View::create($viewData)->save();
+        View::firstOrNew(['user_id' => $eventViewData->userId, 'post_id' => $eventViewData->postId, 'ip' => $eventViewData->ip])->save();
     }
 }

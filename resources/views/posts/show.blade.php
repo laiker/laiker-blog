@@ -9,7 +9,7 @@
                     <time>{{ $post->created_at->diffForHumans() }}</time>
                 </p>
                 <p class="mt-4 block text-gray-400 text-xs">
-                    Сегодня {{ $post->viewsCountDaily }} / Всего {{ $post->viewsCountAll }}
+                    Сегодня {{ $post->views_today }} / Всего {{ $post->views_all }}
                 </p>
 
                 <div class="flex items-center lg:justify-center text-sm mt-4">

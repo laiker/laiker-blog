@@ -17,12 +17,6 @@ class PostController extends Controller
             request(['search', 'category', 'author'])
         )->paginate(18)->withQueryString();
 
-        foreach($posts as &$post) {
-            $postViews = $post->views();
-            $post->viewsCountAll = $postViews->count();
-            $post->viewsCountDaily = $postViews->whereDate('viewed_at', Carbon::today())->count();
-        }
-
         return view('posts.index', [
             'posts' => $posts
         ]);
@@ -30,15 +24,7 @@ class PostController extends Controller
 
     public function show(Post $post, Request $request)
     {
-        $postViews = $post->views();
-        $post->viewsCountAll = $postViews->count();
-        $post->viewsCountDaily = $postViews->whereDate('viewed_at', Carbon::today())->count();
-        $eventData = [
-            'post_id' => $post->id,
-            'user_id' => optional($request->user())->id,
-            'ip' => $request->ip()
-        ];
-        PostViewEvent::dispatch($eventData);
+        PostViewEvent::dispatch($post->id, optional($request->user())->id, $request->ip());
         
         return view('posts.show', [
             'post' => $post,
